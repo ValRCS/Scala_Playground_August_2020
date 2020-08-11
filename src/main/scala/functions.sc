@@ -63,4 +63,8 @@ myMutable
 println(add5(10))
 add5(20) == 25
 
-
+//make a functions which RETURNS! reversed and uppercase string (so input string and output string)
+def getReversedUpper(text:String):String = {
+  "ABRACADRABRA" //FIXME change this line
+}
+getReversedUpper("Valdis") == "SIDLAV"
