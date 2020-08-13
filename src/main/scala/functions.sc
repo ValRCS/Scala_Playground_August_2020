@@ -171,3 +171,5 @@ if (true) {
 
 !true
 !false
+
+val myMax = 20
