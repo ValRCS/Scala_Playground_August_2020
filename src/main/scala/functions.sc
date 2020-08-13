@@ -161,3 +161,13 @@ def checkName(myName:String, friendName:String) = {
 checkName("Valdis", "Liga")
 checkName("Valdis", "Valdis")
 //just a comment
+
+//ifs in Scala return something always!!
+if (true) {
+  //do this
+} else {
+  //do this
+}
+
+!true
+!false
