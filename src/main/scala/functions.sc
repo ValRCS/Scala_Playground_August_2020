@@ -69,7 +69,7 @@ add5(20) == 25
 def getReversedUpper(text:String):String = {
   //  println(s"Going to reverse: $text")
   //I could do stuff here and it will not be returned
-  text.toUpperCase.reverse 
+  text.toUpperCase.reverse
 }
 
 def getStringLength(text:String):Int = {
@@ -160,3 +160,4 @@ def checkName(myName:String, friendName:String) = {
 
 checkName("Valdis", "Liga")
 checkName("Valdis", "Valdis")
+//just a comment
