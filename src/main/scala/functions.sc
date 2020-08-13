@@ -1,3 +1,4 @@
+44import scala.io.StdIn.readLine
 import scala.jdk.FunctionWrappers.FromJavaDoubleToIntFunction
 
 def print2() = {
@@ -172,4 +173,7 @@ if (true) {
 !true
 !false
 
-val myMax = 20
+
+
+
+//so if / else gives values in Scala
