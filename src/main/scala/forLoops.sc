@@ -90,3 +90,12 @@ print("*"*3)
 //maybe somebody can find another syntax
 print(" "*3 + "*"*5)
 
+for ((item, i) <- arr.zipWithIndex)
+  println(s"Item no $i is $item")
+
+for (i <- arr.indices)
+  println(s"Item no $i is ${arr(i)}")
+
+
+
+
