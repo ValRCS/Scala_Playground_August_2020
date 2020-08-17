@@ -29,17 +29,17 @@ for (i <- Array(10,20,30)) {
 }
 //i is gone from memory here
 
-val myFiles = (new File(".")).listFiles()
+val myFiles = new File(".").listFiles()
 for (file <- myFiles) println(file)
 //remember file is gone now
 
 println(Paths.get(".").toAbsolutePath)
 
 //hard coded path in Windows (Mac and Linux would have / instead of \\
-val myGitHubDir = (new File("C:\\Users\\val-p1\\Scala_Test\\src\\main\\scala")).listFiles()
+val myGitHubDir = new File("C:\\Users\\val-p1\\Scala_Test\\src\\main\\scala").listFiles()
 for (file <- myGitHubDir) println(file)
 
-(new File("C:/Users")).listFiles().foreach(println)
+new File("C:/Users").listFiles().foreach(println)
 
 Array(10,20,30).foreach(println)
 //foreach is nice for doing smaller things one or two lines
@@ -47,6 +47,39 @@ Array(10,20,30).foreach(item => println(s"Answer is $item"))
 //item is gone here it was created for looping through above
 
 for (item <- Array(10,20,25)) println(s"Answer is $item")
+
+val arr = Array(10,20,26,42)
+//not Scala style, this is old C style
+//this is more dangerous because you could make an off by one error
+//for (i <- 0 until arr.length) {
+//  println(s"Element with index $i is ${arr(i)}")
+//}
+//if you do need index then use indices!!
+for (i <- arr.indices) {
+  println(s"Element with index $i is ${arr(i)}")
+}
+
+
+
+def prettyPrint(anytype: Any):Unit= {
+  println(s"Just a pretty print of $anytype")
+}
+
+prettyPrint("Valdis")
+
+val myTexts = Seq("Valdis","Ruta","Liga","Peteris")
+
+
+myTexts.foreach(prettyPrint)
+arr.foreach(prettyPrint)
+for (element <- arr) {
+  println(s"I could something else with $element")
+  prettyPrint(element)
+}
+
+for (element <- arr if element > 25) {
+  println(s"Nice element $element")
+}
 
 print("*")
 print(" ")
