@@ -12,10 +12,10 @@ object CountLines extends App{
   //loop through each line and count length
   //keep a running total of all characters
 
-  def getListOfFiles(dir: String):List[File] = {
+  def getListOfFiles(dir: String, postFix: String = ".scala"):List[File] = {
     val d = new File(dir)
     if (d.exists && d.isDirectory) {
-      d.listFiles.filter(_.isFile).toList
+      d.listFiles.filter(_.isFile).filter(f => f.getName.endsWith(postFix)).toList
     } else {
       List[File]()
     }
