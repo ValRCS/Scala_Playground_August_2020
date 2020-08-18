@@ -42,4 +42,16 @@ val myData = Seq.range(10,50,3)
 myData.foreach(println)
 
 //TODO filter from myData only those numbers which divide by 5
-//val my5 =
+val my5 = myData.filter(n => n % 5 == 0)
+my5.foreach(println)
+
+val my500 = my5.map(n => n * 100).filter(n => n > 2000)
+my500.foreach(println)
+
+val myGreetings = my500.map(n => s"Hello Mr./Mrs. $n")
+myGreetings.foreach(println)
+myGreetings.getClass
+
+//TODO print all cubes of even numbers from 10 to 25
+//you can use filter or range
+//please use map after that
