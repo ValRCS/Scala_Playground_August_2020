@@ -73,10 +73,38 @@ myFood.count(_ == 'o')
 val myMagic = "abrakadabra"
 myMagic.count(_ == 'a')
 
-myMagic.replace("abra", "oxxo")
+val replacedString = myMagic.replace("abra", "oxxo")
 
 //first match
 myMagic.indexOf('r')
 myMagic.indexOf("r")
 
 myMagic.indexOf("aka")
+myMagic.foreach(println)
+
+//lets make a new string where only letters less than g are present
+val filteredLetters = myMagic.filter(c => c < 'g')
+myMagic.toUpperCase
+myMagic.map(c => c.toUpper)
+//remember in Scala everything (99.9%) returns something
+myMagic.map(c => if (c < 'g') c.toUpper else c)
+
+val myNewFood = "potatoes"
+// filter only letters higher than f,
+//after that letters less than t should be capitalized
+// you can do this in one line or save the filtered results first and then map
+myNewFood.filter(c => c > 'f').map(c => if (c < 't') c.toUpper else c)
+myNewFood.sorted
+myNewFood.toSeq.sorted.unwrap // this is the recommend way now, go back to the string
+myNewFood.sortWith(_ > _)
+myNewFood.toSeq.sortWith(_ > _).unwrap
+myNewFood.sortWith((a,b) => a > b)
+myNewFood.toSeq.sortWith((a,b) => a > b).unwrap
+myNewFood.toSet.toSeq.mkString("---")
+// so we take a string only grab unique characters then make a new string sorted
+myNewFood.toSet.toSeq.sorted.mkString("")
+val myNums = Array(1,2,10,20)
+val myNumStr = myNums.mkString(",")
+val mySum = myNums.sum
+val result = s"Result of summing $myNumStr is $mySum "
+val result = s"Result of summing ${myNums.mkString(",") } is ${myNums.sum} "
