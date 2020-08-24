@@ -45,3 +45,18 @@ resultsSeq
 
 //get me the same result without regex, all items starting with letter d
 //try to get a regex that the same thing :)
+mySeq.filter(_(0) == 'd')
+
+val rxx = "(\\bd\\D+)"
+mySeq.filter(_ matches rxx)
+
+val myTxt = "Turns out Valdis Saulespurens was teaching classes in the year 2020 not 2021 and certainly not 75 ..."
+val mySplit = myTxt.split(" ")
+mySplit(0)
+mySplit(1)
+mySplit.last
+val capitalized = mySplit.filter(_(0).isUpper)
+capitalized(1)
+capitalized(2) //we would have to add extra check if there is possibilyt of line without first and last name
+val years = mySplit.filter(item => item.forall(_.isDigit) && item.length == 4)
+years.head // or years(0)
