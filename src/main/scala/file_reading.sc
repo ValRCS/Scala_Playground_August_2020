@@ -53,9 +53,32 @@ longestLine
 //filter only lines starting with And
 "And looked down".slice(0,3)
 "An".slice(0,3)
-
+myText.filter(_.startsWith("And ")).foreach(println)
+myText.filter(_.slice(0,4) == "And ").foreach(println)
+myText.filter(_.matches("^[And ].*")).foreach(println)
 //we will return and check on a solution
 
+//let's filter by lines which have word(partial is ok) - road
+myText.filter(_.contains("road")).foreach(println)
+myText.filter(_.contains("verge")).foreach(println)
+myText.filter(_.matches(".*verge.*")).foreach(println)
+
+import java.io._
+//so printWriter if you want to just create the file from new each time
+val fName = "newresults.txt"
+//val pw = new FileWriter(new File(s"c:/poems/$fName"), true)
+val pw = new FileWriter(s"c:/poems/$fName", true)
+pw.write("My Results are:\n")
+myText.filter(_.contains("road")).map(_ + "\n").foreach(pw.write)
+for (myLine <- myText)
+  if (myLine.contains("road"))
+    pw.write(myLine + "\n")
+
+pw.close() //it is crucial that we close the file when we finish
+
+val fw = new FileWriter(s"c:/poems/$fName", true)
+fw.write("Look ma i am appending some more stuff\n")
+fw.close()
 
 //myLines.foreach(println) //Iterator is exhausted
 //myLines.foreach(println)
