@@ -15,8 +15,8 @@ object CookBook extends App {
     scala.util.Success
   }
 
-  //the actual program runs here
+  //the actual program runs here, little tiny pipeline like a factory
   val mySeq = openSource(srcName)
-  val filteredSeq = processSeq(mySeq)
+  val filteredSeq = processSeq(Array("Val","Some"))
   saveSeq(dstName,filteredSeq)
 }
