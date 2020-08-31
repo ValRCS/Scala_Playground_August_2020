@@ -1,8 +1,9 @@
-class Person(val fixedFirstName: String, var lastName: String, var age:Int, var isVoter: Boolean = true) {
+class Person(val fixedFirstName: String, var lastName: String, var age:Int) {
   //function inside class that's a method
   private var fullName = s"$fixedFirstName $lastName"
   //if it is not private it is public!!
   val votingAge = 18
+  var isVoter = false //we could have done logic here but danger is that complicated logic should only reside in one place
   private var accessCounter = 0
   def prettyPrint() = println(s"$fixedFirstName, and also $lastName, aged: $age")
   def isEligible(): Boolean ={

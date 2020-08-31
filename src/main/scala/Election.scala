@@ -54,6 +54,13 @@ val allVoters = people.filter(_.isVoter) //same as two lines above
   //first do it with a regular for loop
   //then try map and sort maybe
 
+  val lastNamesSorted = people.sortBy(_.lastName.length)
+  val longestLastName = lastNamesSorted.takeRight(1)
+  lastNamesSorted.foreach(human => println(human.lastName))
+  longestLastName.foreach(human => println(s"The longest last name is: ${human.lastName}."))
 
+  println(s"Longest lastname is ${people.map(human => human.lastName.length).sorted.last} chars long")
+
+  print(s"Longest is ${people.map(h => h.lastName).sortBy(_.length).last}")
 
 }
