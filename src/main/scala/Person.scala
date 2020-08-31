@@ -28,8 +28,12 @@ class Person(val fixedFirstName: String, var lastName: String, var age:Int, var 
 
   def growUp(years:Int): Unit = {
     age += years
+    secretFun()
     isEligible()
   }
+
+  //idea behind private functions and variables is to expose publicly only what is needed
+  private def secretFun() = println("Secret Fun")
   //this will run one time when we construct(initialize) our new person objct
   isEligible()
   println(s"Constructor is done for  $fullName !")

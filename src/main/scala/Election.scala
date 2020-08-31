@@ -38,11 +38,21 @@ object Election extends App {
   println(s"Average age is $avgAge")
   println(people.map(_.age).sum / people.size.toDouble)
 
-  val youngOnes = people.filter(human => human.age < 40)
+//  val youngOnes = people.filter(human => human.age < 40)
+  val youngOnes = people.filter(_.age < 40)
   println(youngOnes.size)
 
   //get me all Eligible Voters
 //  val allVoters =
+//val allVoters = people.filter(human => human.isVoter == true)
+//val allVoters = people.filter(human => human.isVoter)
+val allVoters = people.filter(_.isVoter) //same as two lines above
+  allVoters.foreach(_.prettyPrint())
+  allVoters.foreach(human => println(human.getFullName()))
+
+//find the longest last name among all people
+  //first do it with a regular for loop
+  //then try map and sort maybe
 
 
 
