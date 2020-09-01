@@ -18,5 +18,12 @@ val vw3 = Car("VW",2010, "Golf")
   //modify Car class to accept mileage this will be regular class variable(property)
   //because we want to change the mileage
   //add changeMileage method (method should only take positive change)
+  //add currentMileage method
+  val hondas = Range(2010,2018).map(Car("Honda",_,"CR-V")) // 9 not 8 Hondas
+  println(hondas(3))
+
+  //who can print all mileages for all hondas here?
+  println(hondas(4).getMiles())
+
 
 }
