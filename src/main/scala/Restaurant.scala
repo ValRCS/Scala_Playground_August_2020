@@ -11,4 +11,5 @@ object Restaurant extends App{
   doggie.make_noise()
   val mice = Range(1,10).map(n => new Mouse(s"Mice No. $n"))
   mice.foreach(_.squeek())
+  println(doggie)
 }
