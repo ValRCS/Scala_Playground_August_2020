@@ -9,6 +9,7 @@ case class Car(make: String, year: Int, model: String) {
   var mod = ""
   private var miles = 0
   Random.setSeed(9000)//since random is actually pseudorandom
+  //purpose of seed is to provide same pseudorandom values across different computers
   private val currentYear = Calendar.getInstance().get(Calendar.YEAR)
   def modifyCar(new_mod:String) = mod = new_mod
   def rideTheCar() = println(s"Riding my car $model")
