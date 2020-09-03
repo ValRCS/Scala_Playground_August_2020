@@ -1,0 +1,3 @@
+class NumData extends Summarize {
+
+}
