@@ -1,11 +1,11 @@
-class Person(val fixedFirstName: String, var lastName: String, var age:Int) {
+class Person(var firstName: String, var lastName: String, var age:Int) {
   //function inside class that's a method
-  private var fullName = s"$fixedFirstName $lastName"
+  private var fullName = s"$firstName $lastName"
   //if it is not private it is public!!
   val votingAge = 18
   var isVoter = false //we could have done logic here but danger is that complicated logic should only reside in one place
   private var accessCounter = 0
-  def prettyPrint() = println(s"$fixedFirstName, and also $lastName, aged: $age")
+  def prettyPrint() = println(s"$firstName, and also $lastName, aged: $age")
   def isEligible(): Boolean ={
     if (age >= votingAge) {
       isVoter = true
@@ -15,10 +15,25 @@ class Person(val fixedFirstName: String, var lastName: String, var age:Int) {
     isVoter
   }
   //setter
-  def setLastName(newLastName:String): Unit = {
+  def setLastName(newLastName:String): this.type = {
     lastName = newLastName
-    fullName = s"$fixedFirstName $lastName"
+    updateFullName()
+    this
   }
+
+  def setAge(newAge:Int): this.type = {
+    age = newAge
+    this
+  }
+  //make a setter for first name which also returns this
+
+  def setFirstName(newFirstName:String): this.type = {
+    firstName = newFirstName
+    updateFullName()
+    this
+  }
+
+  private def updateFullName() = fullName = s"$firstName $lastName"
 
   def getFullName() = {
     accessCounter += 1 //this is private var outside does not see it!!

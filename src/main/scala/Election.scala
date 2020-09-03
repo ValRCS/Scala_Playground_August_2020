@@ -2,7 +2,7 @@ object Election extends App {
   //we create an adam object based from Person class blueprint
   val adam = new Person("Adam","Sandler", 49)
   val tommy = new Person("Tom", "Sawyer", 12)
-  println(adam.fixedFirstName) // we printed a property from this object
+  println(adam.firstName) // we printed a property from this object
   adam.prettyPrint()
 //  println(adam.fullName)
   println(adam.getFullName())
@@ -61,6 +61,12 @@ val allVoters = people.filter(_.isVoter) //same as two lines above
 
   println(s"Longest lastname is ${people.map(human => human.lastName.length).sorted.last} chars long")
 
-  print(s"Longest is ${people.map(h => h.lastName).sortBy(_.length).last}")
+  println(s"Longest is ${people.map(h => h.lastName).sortBy(_.length).last}")
+
+  tommy.prettyPrint()
+  tommy.setLastName("Tomster").setAge(55).prettyPrint()
+
+  //change tommys first name to Al here before prettyPrint
+  tommy.setLastName("Weird").setFirstName("Al").setAge(35).prettyPrint()
 
 }
