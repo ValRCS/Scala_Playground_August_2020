@@ -66,9 +66,20 @@ println(smallNums.diff(medNums) | medNums.diff(smallNums))
 val alphabet = ('a' to 'z').toSet
 ('a' to 'z').mkString("")
 
-def isPangram(sentence: String, alpha: String = "abcdefghijklmnopqrstuvwxyz" ): Boolean = {
-  //TODO create some set and compare them thats all :)
-  // we can make sets from strings with toSet
+//def isPangram(sentence: String, alpha: String = "abcdefghijklmnopqrstuvwxyz" ): Boolean = {
+//  //TODO create some set and compare them thats all :)
+//  // we can make sets from strings with toSet
+//
+//  false //FIXME
+//}
 
-  false //FIXME
+//sane default meaning English alphabet but if needed we can pass another language
+def isPangram(sentence: String, alpha: String = "abcdefghijklmnopqrstuvwxyz"): Boolean = {
+//  if (sentence.toSet == alpha.toSet) true else false
+//  sentence.toSet == alpha.toSet // no need for the if
+  alpha.toSet.subsetOf(sentence.toSet)
 }
+
+println(isPangram("waltz bad nymph for quick jigs vex"))
+println(isPangram("waltz basck jigs vex"))
+println(isPangram("waltz bad nymph for quick jigs vex TT "))
