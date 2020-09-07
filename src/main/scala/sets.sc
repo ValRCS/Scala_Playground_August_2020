@@ -35,8 +35,40 @@ val newSet = fruit.union(mutSet)
 println(newSet)
 val vegetables = Set("potatoes", "carrots")
 val anotherSet = fruit ++ mutSet ++ vegetables
-//so ++ is alias for union method
+//so ++ actually adding the sets together which would work in the end the same as union
 // diff is not idempotent meaning it works differently which set goes first
 val diffSet = fruit -- mutSet //gets you values not in mutSet
 val diffSet2 = mutSet.toSet -- fruit //gets you values NOT in fruit
 
+val intersectSet = fruit.intersect(mutSet) //values common to both sets
+// so & is alias to intersection
+val intersectSet2 = mutSet.toSet & fruit
+// so | is the real alias to union
+val orSet = fruit | mutSet | vegetables
+
+val bigNums = (1 to 10).toSet
+val smallNums = (3 to 6).toSet
+smallNums.subsetOf(bigNums)
+
+def simDiff(s1: Set[Any], s2: Set[Any]):Set[Any] = {
+  s1.diff(s2) | s2.diff(s1)
+}
+
+val medNums = (4 to 8).toSet
+println(simDiff((3 to 6).toSet, (4 to 8).toSet))
+println(smallNums.diff(medNums) | medNums.diff(smallNums))
+
+//write a function which check if the sentence is a pangram
+// "The quick brown fox jumps over a lazy dog" is a pangram
+// https://en.wikipedia.org/wiki/Pangram
+
+//find a list of ascii lower letters
+val alphabet = ('a' to 'z').toSet
+('a' to 'z').mkString("")
+
+def isPangram(sentence: String, alpha: String = "abcdefghijklmnopqrstuvwxyz" ): Boolean = {
+  //TODO create some set and compare them thats all :)
+  // we can make sets from strings with toSet
+
+  false //FIXME
+}
