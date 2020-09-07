@@ -83,3 +83,12 @@ def isPangram(sentence: String, alpha: String = "abcdefghijklmnopqrstuvwxyz"): B
 println(isPangram("waltz bad nymph for quick jigs vex"))
 println(isPangram("waltz basck jigs vex"))
 println(isPangram("waltz bad nymph for quick jigs vex TT "))
+
+"kartupelis".toSet.size
+"kartupelis".size
+
+def isUnique(text:String):Boolean = text.toSet.size == text.size
+//size should be much quicker than sorting, question is toSet quicker than sorting
+
+isUnique("food")
+isUnique("Valdis")
