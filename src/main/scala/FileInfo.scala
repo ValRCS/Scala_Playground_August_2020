@@ -98,8 +98,27 @@ object FileInfo extends App {
   val ourPurchases = getPurchaseSeq(filteredResults.slice(1,filteredResults.size))
 //  println(ourPurchases(0))
   val sortedByPrice = ourPurchases.sortBy(_.price).reverse
-  sortedByPrice.slice(0,5).foreach(println)
+//  sortedByPrice.slice(0,5).foreach(println)
 
-  //TODO find all million plus purchases
-  //TODO find the best deals meaning sort by purchase / tax_price ratio
+  println("Expensive Million Plus purchases")
+  val millionPurchases = sortedByPrice.filter(_.price >= 1000000)
+  millionPurchases.foreach(println)
+//  val sortedByValue = ourPurchases.sortWith((p, tp) => p.price / tp.tax_price > p.price / tp.tax_price)
+  val bestDeals = ourPurchases.sortBy(el => el.price/el.tax_price).reverse
+//  val bestValue = sortedByValue(0)
+  println("Best deals")
+  bestDeals.reverse.slice(0,15).foreach(println)
+
+  println("Biggest purchases")
+  //TODO fix our properties areas
+  val fixedArea = ourPurchases.map(
+      t => if (t.area > 1) t
+      else {
+        Purchase(t.region, t.re_num, t.re_type, t.price, t.tax_price, t.area * 10000, t.dom_sk, t.dom_sauc)
+      }
+  )
+
+  val biggestProperties = fixedArea.sortBy(_.area).reverse
+  biggestProperties.slice(0,10).foreach(t => println(s"Area ${t.area}"))
+  biggestProperties.reverse.slice(0,10).foreach(t => println(s"Area ${t.area}"))
 }
