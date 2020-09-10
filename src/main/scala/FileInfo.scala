@@ -40,10 +40,35 @@ object FileInfo extends App {
     val bufferedSource = io.Source.fromFile(fileName)
     for (line <- bufferedSource.getLines) {
       val splitLine = line.split(";")
-      //FIXME find the lines with the splitSize
+      if (splitLine.size == splitSize){
+        println(line)
+        count += 1
+      }
     }
     bufferedSource.close
     count //return how many lines are there
+  }
+
+  def getLineSplits(fileName:String): Seq[Int] = {
+    var myListBuf = scala.collection.mutable.ListBuffer[Int]()
+    val bufferedSource = io.Source.fromFile(fileName)
+    for (line <- bufferedSource.getLines) {
+      val splitLine = line.split(";")
+      myListBuf += splitLine.size
+    }
+    bufferedSource.close
+    myListBuf.toSeq //return how many lines are there
+  }
+
+  def getParsedLines(fileName:String) = {
+    var myListBuf = scala.collection.mutable.ListBuffer[Seq[String]]()
+    val bufferedSource = io.Source.fromFile(fileName)
+    for (line <- bufferedSource.getLines) {
+      val splitLine = line.split(";")
+      myListBuf += splitLine
+    }
+    bufferedSource.close
+    myListBuf.toSeq //return how many lines are there
   }
 
   val filePath = "./src/resources/fails_par_2019_gadu.csv"
@@ -51,7 +76,16 @@ object FileInfo extends App {
   println(s"We got a file with $lineCount lines")
   val rowSplitCount = getRowSplitSize(filePath)
   println(s"We got a file with $rowSplitCount lines")
-  val linesWith7 = getLinesWithSplitSize(filePath, 7)
-  println(linesWith7)
+  val linesWith6 = getLinesWithSplitSize(filePath, 6)
+  println(linesWith6)
+  val myLineSplits = getLineSplits(filePath)
+  println(myLineSplits.max, myLineSplits.min)
+  val uniques = myLineSplits.toSet //with sets we can check for uniques
+  println(uniques)
+
+  val rawSplit = getParsedLines(filePath)
+  println(rawSplit.size)
+  //TODO filter only the lines with length 8
+//  val filteredResults =
 
 }
