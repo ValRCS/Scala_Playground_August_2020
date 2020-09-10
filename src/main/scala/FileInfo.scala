@@ -117,8 +117,16 @@ object FileInfo extends App {
         Purchase(t.region, t.re_num, t.re_type, t.price, t.tax_price, t.area * 10000, t.dom_sk, t.dom_sauc)
       }
   )
+  //just an example of selective mapping
+  val onlyPrices = ourPurchases.map(t => if (t.price > 2000000) t.price*10 else t.price)
+  println(onlyPrices.sorted.reverse.slice(0,5))
 
   val biggestProperties = fixedArea.sortBy(_.area).reverse
   biggestProperties.slice(0,10).foreach(t => println(s"Area ${t.area}"))
   biggestProperties.reverse.slice(0,10).foreach(t => println(s"Area ${t.area}"))
+
+  println(biggestProperties(0))
+  biggestProperties(0).area += 100000
+  println(biggestProperties(0))
+
 }
