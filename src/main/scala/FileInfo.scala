@@ -71,6 +71,10 @@ object FileInfo extends App {
     myListBuf.toSeq //return how many lines are there
   }
 
+  def getPurchaseSeq(splitLineSeq: Seq[Seq[String]]) : Seq[Purchase] = {
+    splitLineSeq.map(t => Purchase(t(0),t(1).toLong,t(2),t(3).toDouble,t(4).toInt,t(5).toDouble,t(6).toInt,t(7).toLong))
+  }
+
   val filePath = "./src/resources/fails_par_2019_gadu.csv"
   val lineCount = getLineCount(filePath)
   println(s"We got a file with $lineCount lines")
@@ -85,7 +89,17 @@ object FileInfo extends App {
 
   val rawSplit = getParsedLines(filePath)
   println(rawSplit.size)
-  //TODO filter only the lines with length 8
-//  val filteredResults =
+  println(rawSplit(3))
 
+//  val filteredResults =
+  val filteredResults = rawSplit.filter(_.size == 8)
+  println(filteredResults.size)
+  println(rawSplit(0))
+  val ourPurchases = getPurchaseSeq(filteredResults.slice(1,filteredResults.size))
+//  println(ourPurchases(0))
+  val sortedByPrice = ourPurchases.sortBy(_.price).reverse
+  sortedByPrice.slice(0,5).foreach(println)
+
+  //TODO find all million plus purchases
+  //TODO find the best deals meaning sort by purchase / tax_price ratio
 }
