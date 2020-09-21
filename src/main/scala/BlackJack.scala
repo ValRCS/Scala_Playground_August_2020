@@ -22,12 +22,22 @@ object BlackJack extends App {
   gameDeck = gameDeck.init // everyting but last element
   playerDeck.foreach(println)
   var command = readLine("(S)top or (H)it ?")
+
+  def getScore(deck: Seq[((String, String), Int)]) = {
+    var preScore = deck.map(_._2).sum
+    val sortedDeck = deck.sortBy(_._2)
+    if (sortedDeck(0)._2 == 1 && preScore <= 11) {
+      preScore += 10 //TODO test this
+    }
+    preScore
+  }
+
   var score = playerDeck.map(_._2).sum
   while (!command.startsWith("S") && score < 21) {
     playerDeck = playerDeck ++ Seq(gameDeck.last)
     gameDeck = gameDeck.init // everything but last element
     playerDeck.foreach(println)
-    score = playerDeck.map(_._2).sum //FIXME score function!!
+    score = getScore(playerDeck) //FIXME score function!!
     println(s"Your score is $score")
     command = readLine("(S)top or (H)it ?")
   }
@@ -40,14 +50,17 @@ object BlackJack extends App {
     println("Let's see what the computer does...")
     var computerScore = 0
     var computerDeck = Seq(gameDeck.last)
+    gameDeck = gameDeck.init
     while (computerScore < 21 && computerScore < computerStops) {
       computerDeck = computerDeck ++ Seq(gameDeck.last)
       gameDeck = gameDeck.init // everything but last element
       computerDeck.foreach(println)
-      computerScore = computerDeck.map(_._2).sum //FIXME score function def a score function
+      computerScore = getScore(computerDeck)
       println(s"Computer score is $computerScore")
     }
-    if (computerScore > score) {
+    if (computerScore > 21) {
+      println("You win!")
+    } else if (computerScore > score) {
       println("Computer wins!")
     } else {
       println("You win!")
