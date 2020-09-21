@@ -11,13 +11,12 @@ object GuessNum extends App {
   var userGuess = readInt()
   while (userGuess != trueNum) {
     if (userGuess > trueNum)
-        println(s"$userGuess that's too much! Try again ")
+        println(s"$userGuess TOO BIG! Try again ")
     else {
-      println(s"$userGuess that's too little! Try again ")
+      println(s"$userGuess SMALL! Try again ")
     }
     userGuess = readInt()
   }
-
-
+  print(s"Nice you won! the number indeed is $trueNum")
   //TODO get some exit code perhaps
 }
