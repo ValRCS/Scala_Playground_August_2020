@@ -1,85 +1,84 @@
 import scala.io.StdIn.readLine
 import scala.util.Random
 
-object BlackJack extends App {
-  println("Let's play black Jack!")
-  //TODO we need card deck Seq of Tuples or possibly Sequence of Card class
-  val computerStops = 17
-  val suits = Seq("diamonds","hearts","clubs","spades")
-  val cardVals = Range(2,11).map(_.toString)
-  val allVals = cardVals ++ Seq("J","Q","K","A")
-//  println(allVals)
-  val cardValues = Range(2,11).toSeq ++ Seq(10,10,10,1) //FIXME Ace 1 or 11
-  val cardTup = allVals zip cardValues
-//  println(cardTup)
-  val cross = cardTup.flatMap(x => suits.map(y => (x,y)))
-//  println(cross)
-  val cardDeck = cross.map(card => ((card._1._1, card._2), card._1._2))
-//  println(cardDeck)
-  var gameDeck = Random.shuffle(cardDeck)
-//  println(gameDeck)
-  var playerDeck = Seq(gameDeck.last)
-  gameDeck = gameDeck.init // everyting but last element
-  playerDeck.foreach(println)
-  var command = readLine("(S)top or (H)it ?")
 
-  def getScore(deck: Seq[((String, String), Int)]) = {
-    var preScore = deck.map(_._2).sum
-    val sortedDeck = deck.sortBy(_._2)
-    if (sortedDeck(0)._2 == 1 && preScore <= 11) {
-      preScore += 10 //TODO test this
+object BlackJack extends App {
+  val computerStops = 17
+
+  def getRandomDeck() = {
+    val suits = Seq("diamonds","hearts","clubs","spades")
+    val cardVals = Range(2,11).map(_.toString)
+    val allVals = cardVals ++ Seq("J","Q","K","A")
+    //  println(allVals)
+    val cardValues = Range(2,11).toSeq ++ Seq(10,10,10,1)
+    val cardTup = allVals zip cardValues
+    //  println(cardTup)
+    //cross product here
+    val cross = cardTup.flatMap(x => suits.map(y => (x,y)))
+    //  println(cross)
+    val cardDeck = cross.map(card => ((card._1._1, card._2), card._1._2))
+    val cardClassDeck = cardDeck.map(card => Card(card._1._1, card._1._2, card._2))
+//    Random.shuffle(cardDeck)
+    Random.shuffle(cardClassDeck)
+  }
+  def getScore(deck: Seq[Card]) = {
+    var preScore = deck.map(_.cardValue).sum
+    val sortedDeck = deck.sortBy(_.cardValue)
+    if (sortedDeck.head.rank == "A" && preScore <= 11) {
+      preScore += 10 //so only one Ace can improve our position, two Aces would be 22
     }
     preScore
   }
 
-  var score = playerDeck.map(_._2).sum
-  while (!command.startsWith("S") && score < 21) {
-    playerDeck = playerDeck ++ Seq(gameDeck.last)
+  def main() = {
+    println("Let's play black Jack!")
+    var gameDeck = getRandomDeck()
+    //  println(gameDeck)
+    var playerDeck = Seq(gameDeck.last)
     gameDeck = gameDeck.init // everything but last element
     playerDeck.foreach(println)
-    score = getScore(playerDeck) //FIXME score function!!
-    println(s"Your score is $score")
-    command = readLine("(S)top or (H)it ?")
-  }
+    var command = readLine("(S)top or (H)it ?")
 
-  if (score == 21) {
-    println("Nice blackjack! You WIN!!!")
-  } else if (score > 21) {
-    println(s"You lose! with $score")
-  } else {
-    println("Let's see what the computer does...")
-    var computerScore = 0
-    var computerDeck = Seq(gameDeck.last)
-    gameDeck = gameDeck.init
-    while (computerScore < 21 && computerScore < computerStops) {
-      computerDeck = computerDeck ++ Seq(gameDeck.last)
+    var score = getScore(playerDeck)
+    while (!command.startsWith("S") && score < 21) {
+      playerDeck = playerDeck ++ Seq(gameDeck.last)
       gameDeck = gameDeck.init // everything but last element
-      computerDeck.foreach(println)
-      computerScore = getScore(computerDeck)
-      println(s"Computer score is $computerScore")
+      playerDeck.foreach(println)
+      score = getScore(playerDeck)
+      println(s"Your score is $score")
+      command = readLine("(S)top or (H)it ?")
     }
-    if (computerScore > 21) {
-      println("You win!")
-    } else if (computerScore > score) {
-      println("Computer wins!")
+
+    if (score == 21) {
+      println("Nice blackjack! You WIN!!!")
+    } else if (score > 21) {
+      println(s"You lose! with $score")
     } else {
-      println("You win!")
+      println("Let's see what the computer does...")
+      var computerScore = 0
+      var computerDeck = Seq(gameDeck.last)
+      gameDeck = gameDeck.init
+      while (computerScore < 21 && computerScore < computerStops) {
+        computerDeck = computerDeck ++ Seq(gameDeck.last)
+        gameDeck = gameDeck.init // everything but last element
+        computerDeck.foreach(println)
+        computerScore = getScore(computerDeck)
+        println(s"Computer score is $computerScore")
+      }
+      if (computerScore > 21) {
+        println("You win!")
+      } else if (computerScore > score) {
+        println("Computer wins!")
+      } else {
+        println("You win!")
+      }
+      println("Computer deck:")
+      computerDeck.foreach(println)
+      println("*"*40)
+      println("Your cards")
+      playerDeck.foreach(println)
     }
-    println("Computer deck:")
-    computerDeck.foreach(println)
-    println("*"*40)
-    println("Your cards")
-    playerDeck.foreach(println)
   }
 
-
-
-
-  //UserDeck
-  //Then ComputerDeck
-  //And User loses if over 21
-  //Tie if both even
-  //Computer losers if over 21
-  //UserName
-  //TODO separate functionality into modules
+  main()
 }
