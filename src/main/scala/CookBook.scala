@@ -1,5 +1,7 @@
 import java.io.FileWriter
 
+import scala.sys.process.BasicIO.close
+
 object CookBook extends App {
 //  val srcName = "13177-8.txt"
 //  val dstName = "13177-8-results.txt"
@@ -27,7 +29,7 @@ object CookBook extends App {
   def saveSeq(destName:String, mySeq:Seq[String]) = {
     println(s"Saving my Sequence to file $destName")
 //    mySeq.foreach(println) //we are good up to here
-    val fw = new FileWriter(destName)
+    val fw = new FileWriter(dstName)
     mySeq.map(_ + "\n").foreach(fw.write) // adding new line to each line before writing
     fw.close()
   }
@@ -37,3 +39,5 @@ object CookBook extends App {
   val filteredSeq = processSeq(mySeq)
   saveSeq(dstName,filteredSeq)
 }
+// I can make some changes!!! /Santa/
+println("Hello!")

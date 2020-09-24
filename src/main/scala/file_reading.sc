@@ -36,13 +36,14 @@ res6.split(" ").size
 val mostWords = myText.sortBy(_.split(" ").size).reverse(0)
 mostWords
 
+
 val leastWords = myText.filter(_.size > 0).sortBy(_.split(" ").size).toSeq(0)
 leastWords
 
 // Iteration
 var longestLine = ""
 for(line <- myText)
-  if (line.size > longestLine.size)
+  if (line.size > longestLine.)
     longestLine = line
 
 longestLine
