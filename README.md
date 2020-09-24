@@ -2,3 +2,5 @@
 Scala Playground Fun for August 2020
 
 Just some text
+
+Playground fun in September as well!
