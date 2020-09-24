@@ -1,4 +1,4 @@
 /project/
 /target/
 /src/main/scala/toBeIgnored.sc
-.idea/
+/.idea/
