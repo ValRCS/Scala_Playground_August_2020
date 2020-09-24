@@ -30,6 +30,9 @@ newTreeMap
 //You can do everything with just Map and Seq (with a little bit of Set)
 
 val names = Seq("Valdis","Liga","Maija", "Martins","Ruta")
+val namesMap = names.map(name => name -> name.length).toMap
+val namesTreeMap = namesMap.to(collection.immutable.TreeMap)
+
 
 
 val nmap = names.map(name => name -> name.length).toMap
