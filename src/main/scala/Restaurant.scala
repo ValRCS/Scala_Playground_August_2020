@@ -1,3 +1,5 @@
+import com.github.valrcs.Animal
+
 object Restaurant extends App{
   val cook = new Cook()
   cook.prettyPrint()

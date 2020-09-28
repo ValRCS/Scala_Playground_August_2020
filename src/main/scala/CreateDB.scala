@@ -1,6 +1,9 @@
 import java.sql.{DriverManager, PreparedStatement}
 
+import com.github.valrcs.collections.Contact
 
+/**
+ */
 object CreateDB extends App {
 
   val environmentVars = System.getenv()
@@ -40,6 +43,9 @@ object CreateDB extends App {
   val persons = Seq(person1, person2, person3)
   persons.foreach(println)
 
+  /**
+   *
+   */
   val insertSql =
     """
       |INSERT INTO contacts (
@@ -63,6 +69,11 @@ object CreateDB extends App {
 
   preparedStatement.close()
 
+  /**
+   *
+   * @param preparedStatement
+   * @param person
+   */
   def setPerson(preparedStatement: PreparedStatement, person:Contact) = {
       preparedStatement.setString(1, person.first_name)
       preparedStatement.setString(2, person.last_name)

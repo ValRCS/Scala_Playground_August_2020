@@ -1,5 +1,9 @@
-import BlackJack.{getRandomDeck, getScore}
+import com.github.valrcs.BlackJack.{getRandomDeck, getScore}
+import com.github.valrcs.Card
 
+/**
+ *
+ */
 object BlackJackTest extends App {
   println("Testing BlackJack!")
 //  assert(2+2 == 5) // will throw an error
