@@ -15,7 +15,7 @@ object CreateDB extends App {
   val properties = System.getProperties()
 //  for ((k,v) <- properties) println(s"key: $k, value: $v")
     val sqlite_home = environmentVars.get("SQLITE_HOME").replace("\\", "/")
-
+    println(sqlite_home)
   val dbname = "phone.db"
   println(s"Creating DB $dbname")
   val url = s"jdbc:sqlite:$sqlite_home/db/$dbname"

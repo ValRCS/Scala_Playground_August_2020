@@ -1,4 +1,4 @@
-import java.io.File
+import java.io.{File, FileWriter}
 
 object FileInfo extends App {
   println(System.getProperty("user.dir"))
@@ -129,4 +129,19 @@ object FileInfo extends App {
   biggestProperties(0).area += 100000
   println(biggestProperties(0))
 
+  def getPrettyText(p: Purchase) :String = {
+    s"Area: ${p.area} - Region: ${p.region} - Price: ${p.price} "
+  }
+  biggestProperties.foreach(prop => println(getPrettyText(prop)))
+
+  def saveSeq(destName:String, mySeq:Seq[String]) = {
+    println(s"Saving my Sequence to file $destName")
+    //    mySeq.foreach(println) //we are good up to here
+    val fw = new FileWriter(destName)
+    mySeq.map(_ + "\n").foreach(fw.write) // adding new line to each line before writing
+    fw.close()
+  }
+  val propertyLines = biggestProperties.map(getPrettyText(_))
+
+  saveSeq("C:/temp/bigProperties.txt", propertyLines)
 }
