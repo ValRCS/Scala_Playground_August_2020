@@ -141,7 +141,8 @@ object FileInfo extends App {
     mySeq.map(_ + "\n").foreach(fw.write) // adding new line to each line before writing
     fw.close()
   }
-  val propertyLines = biggestProperties.map(getPrettyText(_))
+//  val propertyLines = biggestProperties.map(getPrettyText(_))
+  val propertyLines = biggestProperties.map(property => getPrettyText(property))
 
   saveSeq("C:/temp/bigProperties.txt", propertyLines)
 }
